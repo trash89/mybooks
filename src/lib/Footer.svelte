@@ -18,13 +18,10 @@
 		bottom: 0;
 		right: 0;
 		width: 100%;
-		height: 1.3rem;
+		height: 1.5rem;
 		background: black;
 		color: white;
 		text-align: center;
-		font-size: 0.75rem;
-		margin: auto;
-		padding: 0.3rem;
 	}
 	.footer a {
 		text-decoration: none;
