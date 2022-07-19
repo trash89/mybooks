@@ -3,7 +3,7 @@
 Fonts
 ======
 */
-@import url("https://fonts.googleapis.com/css?css2?family=Roboto");
+@import url("https://fonts.googleapis.com/css?family=Catamaran:300,400|Kaushan+Script&display=swap");
 
 /* 
 ====== 
@@ -13,8 +13,8 @@ Variables
 :root {
 	--primaryColor: #9e3aa3;
 	--primaryDarkColor: #4e1d51;
-	--primaryFont: "Roboto", serif;
-	--slantedFont: "Caveat", cursive;
+	--primaryFont: "Catamaran", sans-serif;
+	--slantedFont: "Kaushan Script", cursive;
 	--mainWhite: #fff;
 	--offWhite: #f7f7f7;
 	--mainBackground: rgb(250, 245, 243);

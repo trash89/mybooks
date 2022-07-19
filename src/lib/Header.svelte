@@ -12,13 +12,17 @@
 	};
 </script>
 
-<nav>
-	<a href="/">Home</a>
-	<a href="/collections">Collections</a>
-	<a href="/authors">Authors</a>
-	<a href="/books">Books</a>
-	<a href="/whishlist">Whishlist</a>
-	{#if $user}
-		<a href="/logout" on:click={handleLogout}>Logout</a>
-	{/if}
+<nav class="navbar">
+	<div class="nav-container">
+		<div class="nav-center">
+			<a href="/">Home</a>
+			<a href="/collections">Collections</a>
+			<a href="/authors">Authors</a>
+			<a href="/books">Books</a>
+			<a href="/whishlist">Whishlist</a>
+			{#if $user}
+				<a href="/logout" on:click={handleLogout}>Logout</a>
+			{/if}
+		</div>
+	</div>
 </nav>
