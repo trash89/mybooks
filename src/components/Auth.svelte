@@ -31,8 +31,9 @@
 			user.set(createdUser);
 		}
 		if ($user) {
-			goto("/books");
 			globalStore.toggleItem("alert", true, "welcome to shopping madness my friend!");
+			goto("/books");
+			globalStore.toggleItem("alert", false);
 			// add alert
 			return;
 		}

@@ -1,5 +1,15 @@
 <script context="module">
 	export const prerender = true;
+	import { user } from "$lib/sessionStore";
+	import { supabase } from "$lib/supabaseClient";
+
+	import { goto } from "$app/navigation";
+	const handleLogout = async () => {
+		const { error } = await supabase.auth.signOut();
+		if (!error) {
+			goto("/");
+		}
+	};
 </script>
 
 <div>
@@ -9,6 +19,8 @@
 		<a href="/authors">Authors</a>
 		<a href="/books">Books</a>
 		<a href="/whishlist">Whishlist</a>
-		<a href="/login">login</a>
+		{#if $user}
+			<a href="/logout" on:click={handleLogout}>logout</a>
+		{/if}
 	</nav>
 </div>
