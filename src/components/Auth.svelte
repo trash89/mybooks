@@ -1,14 +1,17 @@
 <script>
 	import { goto } from "$app/navigation";
-	import globalStore from "../lib/globalStore";
+	//import globalStore from "../lib/globalStore";
 	import { user } from "$lib/sessionStore";
 	import { supabase } from "$lib/supabaseClient";
 
 	let email = "";
 	let password = "";
 	let isMember = true;
+	let err;
+
 	//add alert
-	$: isEmpty = !email || !password || $globalStore.alert;
+	$: isEmpty = !email || !password;
+	//|| $globalStore.alert;
 	//toggle member
 	function toggleMember() {
 		isMember = !isMember;
@@ -16,28 +19,31 @@
 	// handle submit
 	async function handleSubmit() {
 		// add alert
-		globalStore.toggleItem("alert", true, "loading data...please wait!");
+		//globalStore.toggleItem("alert", true, "loading data...please wait!");
 		if (isMember) {
-			const {
-				user: existingUser,
-				session,
-				error,
-			} = await supabase.auth.signIn({ email, password });
-			if (error) throw error;
+			const { user: existingUser, error } = await supabase.auth.signIn({ email, password });
+			if (error) {
+				err = error;
+				console.log(err);
+				//throw error;
+			}
 			user.set(existingUser);
 		} else {
-			const { user: createdUser, session, error } = await supabase.auth.signUp({ email, password });
-			if (error) throw error;
+			const { user: createdUser, error } = await supabase.auth.signUp({ email, password });
+			if (error) {
+				err = error;
+				//throw error
+			}
 			user.set(createdUser);
 		}
 		if ($user) {
-			globalStore.toggleItem("alert", true, "welcome to shopping madness my friend!");
+			//globalStore.toggleItem("alert", true, "welcome to shopping madness my friend!");
 			goto("/books");
-			globalStore.toggleItem("alert", false);
+			//globalStore.toggleItem("alert", false);
 			// add alert
 			return;
 		}
-		globalStore.toggleItem("alert", true, "there was an error! please try again", true);
+		//globalStore.toggleItem("alert", true, "there was an error! please try again", true);
 		// add alert
 	}
 </script>
@@ -75,5 +81,8 @@
 			{/if}
 			<button type="button" on:click={toggleMember}>click here</button>
 		</p>
+		{#if err}
+			<p class="register-link alert-danger">{err?.message}</p>
+		{/if}
 	</form>
 </section>
