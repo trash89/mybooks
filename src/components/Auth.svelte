@@ -82,7 +82,7 @@
 			<button type="button" on:click={toggleMember}>click here</button>
 		</p>
 		{#if err}
-			<p class="register-link alert-danger">{err?.message}</p>
+			<p class="error">{err?.message}</p>
 		{/if}
 	</form>
 </section>
