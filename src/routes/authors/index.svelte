@@ -1,6 +1,5 @@
 <script>
   import { onMount } from "svelte";
-  import { user } from "$lib/sessionStore";
   import { supabase } from "$lib/supabaseClient";
 
   let authors = [];
@@ -30,17 +29,12 @@
 <h1>authors</h1>
 <a href="/authors/newAuthor"><i class="fa-solid fa-plus" /></a>
 
-<table>
+<table class="table table-bordered table-hover table-responsive-sm">
   <thead>
     <tr>
-      <th>Search</th>
-      <th><input bind:value={searchFirstname} /></th>
-      <th><input bind:value={searchLastname} /></th>
-    </tr>
-    <tr>
       <th>Action</th>
-      <th>Firstname </th>
-      <th>Lastname</th>
+      <th>Firstname <input type="text" bind:value={searchFirstname} placeholder="%" /></th>
+      <th>Lastname <input type="text" bind:value={searchLastname} placeholder="%" /></th>
     </tr>
   </thead>
   <tbody>
