@@ -131,7 +131,7 @@ Navbar
 
 .navbar {
   background: var(--mainWhite);
-  height: 5rem;
+  height: 2rem;
   position: fixed;
   z-index: 2;
   top: 0;
