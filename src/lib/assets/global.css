@@ -4,7 +4,6 @@ Fonts
 ======
 */
 @import url("https://fonts.googleapis.com/css?family=Catamaran:300,400|Kaushan+Script&display=swap");
-
 /* 
 ====== 
 Variables 
@@ -49,7 +48,7 @@ body {
   line-height: 1.4;
   font-size: 1rem;
   font-weight: 300;
-  margin-top: 2rem;
+  margin-top: 5rem;
 }
 h1,
 h2,
@@ -132,7 +131,7 @@ Navbar
 
 .navbar {
   background: var(--mainWhite);
-  height: 2rem;
+  height: 5rem;
   position: fixed;
   z-index: 2;
   top: 0;
@@ -586,13 +585,13 @@ Expense Form
 .form {
   width: var(--smallWidth);
   margin: 0 auto;
-  margin-top: 1rem;
-  max-width: 15rem;
+  margin-top: 10rem;
+  max-width: 35rem;
 }
 .login-form,
 .checkout-form {
   background: var(--mainWhite);
-  padding: 1rem 1rem;
+  padding: 1.25rem 1rem;
   text-transform: capitalize;
   border-radius: var(--mainBorderRadius);
   box-shadow: var(--lightShadow);
@@ -609,7 +608,8 @@ Expense Form
   padding: 0.5rem;
   font-size: 1.2rem;
 }
-.form-empty {
+.form-empty,
+.stripe-errors {
   text-align: center;
   color: var(--mainRed);
 }
@@ -715,11 +715,5 @@ Checkout
   margin-bottom: 0;
 }
 .checkout-form button {
-  margin-top: 1rem;
-}
-
-.error {
-  color: var(--mainRed);
-  text-align: center;
   margin-top: 1rem;
 }
