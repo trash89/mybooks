@@ -6,7 +6,7 @@
   let searchFirstname, searchLastname;
   const getAllAuthors = async (pFirstname, pLastname) => {
     try {
-      let query = supabase.from("authors").select("*");
+      let query = supabase.from("authors").select("*").order("lastName", { ascending: true }).order("firstName", { ascending: true });
       if (pFirstname) {
         query = query.like("firstName", `%${pFirstname}%`);
       }
@@ -28,7 +28,7 @@
 
 <p class="h4 text-capitalize">authors</p>
 <a href="/authors/newAuthor"><i class="fa-solid fa-plus" /></a>
-<table class="table table-bordered table-hover table-responsive-sm">
+<table class="table table-responsive table-bordered table-hover">
   <thead>
     <tr>
       <th>Action</th>

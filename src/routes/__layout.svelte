@@ -2,7 +2,6 @@
   export const prerender = true;
   import "$lib/assets/normalize.css";
   import "$lib/assets/fontawesome-free-6.1.1-web/css/all.min.css";
-  //import "$lib/assets/global.css";
 
   import Header from "$lib/Header.svelte";
   import Footer from "$lib/Footer.svelte";
