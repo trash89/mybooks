@@ -26,9 +26,8 @@
   $: getAllAuthors(searchFirstname, searchLastname);
 </script>
 
-<h1>authors</h1>
+<p class="h4 text-capitalize">authors</p>
 <a href="/authors/newAuthor"><i class="fa-solid fa-plus" /></a>
-
 <table class="table table-bordered table-hover table-responsive-sm">
   <thead>
     <tr>

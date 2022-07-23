@@ -3,6 +3,8 @@
   //import globalStore from "../lib/globalStore";
   import { user } from "$lib/sessionStore";
   import { supabase } from "$lib/supabaseClient";
+  import logo from "$lib/assets/logo-192x192.png";
+  import { onMount } from "svelte";
 
   let email = "";
   let password = "";
@@ -46,44 +48,55 @@
     //globalStore.toggleItem("alert", true, "there was an error! please try again", true);
     // add alert
   }
+  let ref;
+  onMount(() => {
+    ref.focus();
+  });
 </script>
 
-<section class="form">
-  <h2 class="section-title">
+<section class="container p-2 my-2 border border-primary rounded-3">
+  <div class="d-flex justify-content-left align-items-center">
+    <img src={logo} alt="MyBooks" width="100px" height="100px" />
+    <p class="h1 text-capitalize">My Books</p>
+  </div>
+
+  <p class="h2 text-center text-capitalize">
     {#if isMember}sign in{:else}register{/if}
-  </h2>
-  <form class="login-form" on:submit|preventDefault={handleSubmit}>
+  </p>
+  <form on:submit|preventDefault={handleSubmit}>
     <!--single input-->
-    <div class="form-control">
-      <label for="email">email</label>
-      <input type="email" id="email" bind:value={email} />
+    <div class="mb-3 mt-3">
+      <label for="email" class="form-label">Email:</label>
+      <input type="email" class="form-control" id="email" bind:value={email} bind:this={ref} />
     </div>
     <!--end of single input-->
     <!--single input-->
-    <div class="form-control">
-      <label for="password">password</label>
-      <input type="password" id="password" bind:value={password} />
+    <div class="mb-3 mt-3">
+      <label for="password" class="form-label">Password:</label>
+      <input type="password" class="form-control" id="password" bind:value={password} />
     </div>
     {#if isEmpty}
-      <p class="form-empty">please fill out all form fields</p>
+      <div class="alert alert-warning text-capitalize">please fill out all form fields</div>
     {/if}
-    <button type="submit" class="btn btn-block btn-primary" disabled={isEmpty} class:disabled={isEmpty}>
+    <div class="d-flex justify-content-center">
+      <button type="submit" class="btn btn-primary text-capitalize" disabled={isEmpty} class:disabled={isEmpty}>
+        {#if isMember}
+          login
+        {:else}
+          register
+        {/if}
+      </button>
+    </div>
+    <div class="text-center text-capitalize">
       {#if isMember}
-        login
+        need to register?
       {:else}
-        register
+        already a member?
       {/if}
-    </button>
-    <p class="register-link">
-      {#if isMember}
-        need to register
-      {:else}
-        already a member
-      {/if}
-      <button type="button" on:click={toggleMember}>click here</button>
-    </p>
+      <button type="button" class="btn btn-link text-capitalize" on:click={toggleMember}>click here</button>
+    </div>
     {#if err}
-      <p class="error">{err?.message}</p>
+      <div class="alert alert-danger">{err?.message}</div>
     {/if}
   </form>
 </section>
