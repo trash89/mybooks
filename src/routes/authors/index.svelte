@@ -37,8 +37,8 @@
     <thead>
       <tr>
         <th>Action</th>
-        <th>Firstname <input type="text" bind:value={searchFirstname} placeholder="%" /></th>
-        <th>Lastname <input type="text" bind:value={searchLastname} placeholder="%" /></th>
+        <th>Firstname <input type="text" class="form-control" bind:value={searchFirstname} placeholder="%" /></th>
+        <th>Lastname <input type="text" class="form-control" bind:value={searchLastname} placeholder="%" /></th>
       </tr>
     </thead>
     <tbody>
