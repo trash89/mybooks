@@ -5,49 +5,71 @@
   import { page } from "$app/stores";
 
   const { authorId } = $page.params;
+  let isError = false;
+  let errorText = "";
+
+  let authorIdNum = 0;
   let firstName = "",
     lastName = "";
   const getAuthor = async (pAuthorId) => {
-    try {
-      let query = supabase.from("authors").select("*").eq("id", pAuthorId);
-      const { data, error } = await query;
-      if (!error) {
-        if (data.length > 0) {
-          firstName = data[0].firstName;
-          lastName = data[0].lastName;
-        } else {
-          console.log("invalid authorId");
-        }
+    const { data, error } = await supabase.from("authors").select("*").eq("id", pAuthorId);
+    if (!error) {
+      if (data.length > 0) {
+        firstName = data[0].firstName;
+        lastName = data[0].lastName;
       } else {
-        console.log(error);
+        isError = true;
+        errorText = "invalid authorId";
       }
-    } catch (err) {
-      console.log(err);
+    } else {
+      isError = true;
+      errorText = error.message;
     }
   };
   const handleCancel = () => {
-    firstName = lastName = "";
+    firstName = lastName = errorText = "";
+    isError = false;
     goto("/authors");
   };
+
   const handleSave = async () => {
-    const { data, error } = await supabase.from("authors").update({ firstName: firstName, lastName: lastName }).match({ id: authorId });
+    const { error } = await supabase
+      .from("authors")
+      .update({ firstName: firstName.toLocaleLowerCase(), lastName: lastName.toLocaleLowerCase() })
+      .match({ id: authorIdNum });
     if (!error) {
       goto("/authors");
+      return;
     } else {
+      isError = true;
+      errorText = error.message;
     }
   };
   const handleDelete = async () => {
-    const { data, error } = await supabase.from("authors").delete().match({ id: authorId });
+    const { error } = await supabase.from("authors").delete().match({ id: authorIdNum });
     if (!error) {
       goto("/authors");
+      return;
     } else {
+      isError = true;
+      errorText = error.message;
     }
   };
   let ref;
   onMount(async () => {
-    await getAuthor(authorId);
+    authorIdNum = parseInt(authorId);
+    if (isNaN(authorIdNum)) {
+      isError = true;
+      errorText = "invalid authorId";
+      return;
+    }
+    await getAuthor(authorIdNum);
     ref.focus();
   });
+  $: if (firstName || lastName) {
+    isError = false;
+    errorText = "";
+  }
 </script>
 
 <section class="container p-2 my-2 border border-primary rounded-3">
@@ -62,11 +84,16 @@
       <input type="text" class="form-control" bind:value={lastName} />
     </div>
     <button type="button" class="btn btn-primary" data-bs-toggle="tooltip" title="Cancel" on:click={handleCancel}><i class="fa-solid fa-times" /></button>
-    <button type="button" class="btn btn-primary" data-bs-toggle="tooltip" title="Delete" on:click={handleDelete} disabled={!firstName || !lastName}
-      ><i class="fa fa-trash" /></button
+    <button type="button" class="btn btn-primary" data-bs-toggle="tooltip" title="Delete" on:click={handleDelete} disabled={!firstName || !lastName || isError}
+      ><i class="fa-solid fa-trash" /></button
     >
-    <button type="button" class="btn btn-primary" data-bs-toggle="tooltip" title="Save" on:click={handleSave} disabled={!firstName || !lastName}
+    <button type="button" class="btn btn-primary" data-bs-toggle="tooltip" title="Save" on:click={handleSave} disabled={!firstName || !lastName || isError}
       ><i class="fa-solid fa-floppy-disk" /></button
     >
+    {#if isError}
+      <div class="alert alert-warning">
+        <strong>Error:</strong>{errorText}
+      </div>
+    {/if}
   </form>
 </section>

@@ -15,7 +15,7 @@
   const handleSave = async () => {
     isError = false;
     errorText = "";
-    const { data, error } = await supabase
+    const { error } = await supabase
       .from("authors")
       .insert([{ firstName: firstName.toLocaleLowerCase(), lastName: lastName.toLocaleLowerCase(), user_id: $user.id }]);
     if (!error) {
@@ -47,7 +47,7 @@
       <input type="text" class="form-control" bind:value={lastName} />
     </div>
     <button type="button" class="btn btn-primary" data-bs-toggle="tooltip" title="Cancel" on:click={handleCancel}><i class="fa-solid fa-times" /></button>
-    <button type="button" class="btn btn-primary" data-bs-toggle="tooltip" title="Save" on:click={handleSave} disabled={!firstName || !lastName}
+    <button type="button" class="btn btn-primary" data-bs-toggle="tooltip" title="Save" on:click={handleSave} disabled={!firstName || !lastName || isError}
       ><i class="fa-solid fa-floppy-disk" /></button
     >
     {#if isError}
