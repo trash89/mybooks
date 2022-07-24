@@ -3,7 +3,8 @@
   import { supabase } from "$lib/supabaseClient";
   import { goto } from "$app/navigation";
   import { onMount } from "svelte";
-  let firstName, lastName, user_id;
+  let firstName = "",
+    lastName = "";
   let isError = false;
   let errorText = "";
   const handleCancel = () => {
@@ -34,6 +35,10 @@
     ref.focus();
   });
 </script>
+
+<svelte:head>
+  <title>Enter a New Author</title>
+</svelte:head>
 
 <section class="container p-2 my-2 border border-primary rounded-3">
   <p class="h4 text-capitalize">enter a new author</p>

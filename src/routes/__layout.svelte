@@ -1,7 +1,8 @@
-<script context="module">
-  export const prerender = true;
-  import "$lib/assets/normalize.css";
+<script>
   import "$lib/assets/fontawesome-free-6.1.1-web/css/all.min.css";
+  import "$lib/assets/normalize.css";
+
+  import { onMount } from "svelte";
 
   import Header from "$lib/Header.svelte";
   import Footer from "$lib/Footer.svelte";
@@ -9,11 +10,11 @@
   import { supabase } from "$lib/supabaseClient";
   import Auth from "../components/Auth.svelte";
 
-  const localUser = supabase.auth.user();
-  user.set(localUser);
-
-  supabase.auth.onAuthStateChange((_, session) => {
-    user.set(session?.user);
+  onMount(() => {
+    user.set(supabase.auth.user());
+    supabase.auth.onAuthStateChange((_, session) => {
+      user.set(session?.user);
+    });
   });
 </script>
 

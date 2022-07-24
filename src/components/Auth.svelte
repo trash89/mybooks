@@ -6,8 +6,8 @@
   import logo from "$lib/assets/logo-192x192.png";
   import { onMount } from "svelte";
 
-  let email = "";
-  let password = "";
+  let email = "",
+    password = "";
   let isMember = true;
   let err;
 
@@ -53,6 +53,10 @@
     ref.focus();
   });
 </script>
+
+<svelte:head>
+  <title>My Books Authentication</title>
+</svelte:head>
 
 <section class="container p-2 my-2 border border-primary rounded-3">
   <div class="d-flex justify-content-left align-items-center">

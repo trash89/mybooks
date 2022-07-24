@@ -2,7 +2,6 @@
   export const prerender = true;
   import { page } from "$app/stores";
   import { user } from "$lib/sessionStore";
-  import Auth from "../components/Auth.svelte";
   import logo from "$lib/assets/logo-192x192.png";
 </script>
 
@@ -32,8 +31,6 @@
           <li class="nav-item">
             <a class={$page.url.pathname === "/logout" ? "nav-link active" : "nav-link"} href="/logout">Logout</a>
           </li>
-        {:else}
-          <Auth />
         {/if}
       </ul>
     </div>

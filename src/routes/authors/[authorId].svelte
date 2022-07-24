@@ -72,6 +72,10 @@
   }
 </script>
 
+<svelte:head>
+  <title>Edit an Author</title>
+</svelte:head>
+
 <section class="container p-2 my-2 border border-primary rounded-3">
   <p class="h4 text-capitalize">edit an author</p>
   <form>
