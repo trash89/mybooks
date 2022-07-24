@@ -13,19 +13,15 @@
   let authorsData = [],
     collectionsData = [];
   const getAllAuthors = async () => {
-    try {
-      const { data, error } = await supabase.from("authors").select("*").order("lastName", { ascending: true }).order("firstName", { ascending: true });
+    const { data, error } = await supabase.from("authors").select("*").order("lastName", { ascending: true }).order("firstName", { ascending: true });
+    if (!error && data.length > 0) {
       authorsData = data;
-    } catch (err) {
-      console.log(err);
     }
   };
   const getAllCollections = async () => {
-    try {
-      const { data, error } = await supabase.from("collections").select("*").order("name", { ascending: true });
+    const { data, error } = await supabase.from("collections").select("*").order("name", { ascending: true });
+    if (!error && data.length > 0) {
       collectionsData = data;
-    } catch (err) {
-      console.log(err);
     }
   };
 
@@ -87,6 +83,7 @@
     <div class="mb-3 mt-3">
       <label for="coll_id" class="form-label">Collection :</label>
       <select bind:value={coll_id} id="coll_id" name="coll_id">
+        <option value="-1" selected />
         {#each collectionsData as data (data.id)}
           <option value={data.id}>{data.name}</option>
         {/each}

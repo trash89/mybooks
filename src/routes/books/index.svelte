@@ -6,15 +6,18 @@
   let searchName;
   const route = "/books";
   const getAllRows = async (pName) => {
-    try {
-      let query = supabase.from("books").select("*").order("author_id", { ascending: true }).order("name", { ascending: true });
-      if (pName) {
-        query = query.like("name", `%${pName}%`);
-      }
-      const { data } = await query;
+    let query = supabase
+      .from("books")
+      .select("id,name,langue,authors(firstName,lastName),collections(name)")
+      .order("lastName", { ascending: true, foreignTable: "authors" })
+      .order("firstName", { ascending: true, foreignTable: "authors" })
+      .order("name", { ascending: true });
+    if (pName) {
+      query = query.like("name", `%${pName}%`);
+    }
+    const { data, error } = await query;
+    if (!error) {
       tableData = data;
-    } catch (err) {
-      console.log(err);
     }
   };
 
@@ -48,7 +51,7 @@
             <a href={`${route}/${data.id}`}><i class="fa-solid fa-pen" /></a>
           </td>
           <td>
-            {data.author_id}
+            {data.authors.lastName},{data.authors.firstName}
           </td>
           <td>
             {data.name}
@@ -57,7 +60,7 @@
             {data.langue}
           </td>
           <td>
-            {data.coll_id}
+            {data.collections?.name || ""}
           </td>
         </tr>
       {/each}
