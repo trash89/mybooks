@@ -53,7 +53,7 @@
       errorText = error.message;
     }
   };
-  $: if (name || langue) {
+  $: if (name || langue || author_id || coll_id) {
     isError = false;
     errorText = "";
   }

@@ -36,7 +36,7 @@
       <thead>
         <tr>
           <th>Action</th>
-          <th><label for="name" class="form-label">Name</label><input type="text" class="form-control" bind:value={searchName} placeholder="%" /></th>
+          <th><input type="text" class="form-control" bind:value={searchName} placeholder="%collection%" /></th>
         </tr>
       </thead>
       <tbody>

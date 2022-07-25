@@ -49,21 +49,10 @@
       <thead>
         <tr>
           <th>Action</th>
-          <th
-            ><label for="searchAuthor" class="form-label">Author</label><input type="text" class="form-control" bind:value={searchAuthor} placeholder="%" /></th
-          >
-          <th><label for="searchName" class="form-label">Name</label><input type="text" class="form-control" bind:value={searchName} placeholder="%" /></th>
-          <th
-            ><label for="searchLangue" class="form-label">Langue</label><input type="text" class="form-control" bind:value={searchLangue} placeholder="%" /></th
-          >
-          <th
-            ><label for="searchCollection" class="form-label">Collection</label><input
-              type="text"
-              class="form-control"
-              bind:value={searchCollection}
-              placeholder="%"
-            /></th
-          >
+          <th><input type="text" class="form-control" bind:value={searchAuthor} placeholder="%author%" /></th>
+          <th><input type="text" class="form-control" bind:value={searchName} placeholder="%book%" /></th>
+          <th><input type="text" class="form-control" bind:value={searchLangue} placeholder="%langue%" /></th>
+          <th><input type="text" class="form-control" bind:value={searchCollection} placeholder="%collection%" /></th>
         </tr>
       </thead>
       <tbody>

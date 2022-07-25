@@ -14,7 +14,7 @@
       <span class="navbar-toggler-icon" />
     </button>
     <div class="collapse navbar-collapse" id="collapsibleNavbar">
-      <ul class="navbar-nav">
+      <ul class="navbar-nav me-auto">
         <li class="nav-item">
           <a class={$page.url.pathname === "/collections" ? "nav-link active" : "nav-link"} href="/collections">Collections</a>
         </li>
@@ -24,15 +24,17 @@
         <li class="nav-item">
           <a class={$page.url.pathname === "/books" ? "nav-link active" : "nav-link"} href="/books">Books</a>
         </li>
-        <li class="nav-item">
-          <a class={$page.url.pathname === "/whishlist" ? "nav-link active" : "nav-link"} href="/whishlist">Whishlist</a>
-        </li>
-        {#if $user}
-          <li class="nav-item">
-            <a class={$page.url.pathname === "/logout" ? "nav-link active" : "nav-link"} href="/logout">Logout</a>
-          </li>
-        {/if}
       </ul>
     </div>
+    {#if $user}
+      <div class="d-flex ">
+        <div class="nav-item dropdown ">
+          <a class="nav-link dropdown-toggle bg-primary text-white" href="/logout" role="button" data-bs-toggle="dropdown">{$user.email}</a>
+          <ul class="dropdown-menu">
+            <li><a class={$page.url.pathname === "/logout" ? "dropdown-item active" : "dropdown-item"} href="/logout">Logout</a></li>
+          </ul>
+        </div>
+      </div>
+    {/if}
   </div>
 </nav>

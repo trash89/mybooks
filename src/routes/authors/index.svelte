@@ -39,22 +39,8 @@
       <thead>
         <tr>
           <th>Action</th>
-          <th
-            ><label for="firstName" class="form-label">First Name</label><input
-              type="text"
-              class="form-control"
-              bind:value={searchFirstname}
-              placeholder="%"
-            /></th
-          >
-          <th
-            ><label for="lastName" class="form-label">Last Name</label><input
-              type="text"
-              class="form-control"
-              bind:value={searchLastname}
-              placeholder="%"
-            /></th
-          >
+          <th><input type="text" class="form-control" bind:value={searchFirstname} placeholder="%firstName%" /></th>
+          <th><input type="text" class="form-control" bind:value={searchLastname} placeholder="%lastName%" /></th>
         </tr>
       </thead>
       <tbody>
