@@ -48,6 +48,16 @@
     //globalStore.toggleItem("alert", true, "there was an error! please try again", true);
     // add alert
   }
+  const handleDemo = async () => {
+    const { user: existingUser, error } = await supabase.auth.signIn({ email: "demo@gmail.com", password: "secret123" });
+    if (error) {
+      err = error;
+      console.log(err);
+      //throw error;
+    }
+    user.set(existingUser);
+  };
+
   let ref;
   onMount(() => {
     ref.focus();
@@ -58,7 +68,7 @@
   <title>My Books Authentication</title>
 </svelte:head>
 
-<section class="container p-2 my-2 border border-primary rounded-3">
+<section class="container w-auto p-2 my-3 shadow border border-primary rounded-3">
   <div class="d-flex justify-content-left align-items-center">
     <img src={logo} alt="MyBooks" width="100px" height="100px" />
     <p class="h1 text-capitalize">My Books</p>
@@ -82,15 +92,17 @@
     {#if isEmpty}
       <div class="alert alert-warning text-capitalize">please fill out all form fields</div>
     {/if}
-    <div class="d-flex justify-content-center">
-      <button type="submit" class="btn btn-primary text-capitalize" disabled={isEmpty} class:disabled={isEmpty}>
+    <div class="d-flex justify-content-center align-content-center align-items-center">
+      <button type="submit" class="btn btn-primary text-capitalize flex-fill m-1" disabled={isEmpty}>
         {#if isMember}
           login
         {:else}
           register
         {/if}
       </button>
+      <button type="button" class="btn btn-primary text-capitalize flex-fill m-1" on:click|preventDefault={handleDemo}>demo</button>
     </div>
+
     <div class="text-center text-capitalize">
       {#if isMember}
         need to register?

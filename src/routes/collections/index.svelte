@@ -31,24 +31,26 @@
 <section class="container p-2 my-2 border border-primary rounded-3">
   <p class="h4 text-capitalize">collections</p>
   <a href={`${route}/newRow`}><i class="fa-solid fa-plus" /></a>
-  <table class="table table-responsive table-bordered table-hover">
-    <thead>
-      <tr>
-        <th>Action</th>
-        <th><label for="name" class="form-label">Name</label><input type="text" class="form-control" bind:value={searchName} placeholder="%" /></th>
-      </tr>
-    </thead>
-    <tbody>
-      {#each tableData as data (data.id)}
-        <tr key={data.id}>
-          <td>
-            <a href={`${route}/${data.id}`}><i class="fa-solid fa-pen" /></a>
-          </td>
-          <td>
-            {data.name}
-          </td>
+  <div class="table-responsive">
+    <table class="table table-bordered table-hover table-sm">
+      <thead>
+        <tr>
+          <th>Action</th>
+          <th><label for="name" class="form-label">Name</label><input type="text" class="form-control" bind:value={searchName} placeholder="%" /></th>
         </tr>
-      {/each}
-    </tbody>
-  </table>
+      </thead>
+      <tbody>
+        {#each tableData as data (data.id)}
+          <tr key={data.id}>
+            <td>
+              <a href={`${route}/${data.id}`}><i class="fa-solid fa-pen" /></a>
+            </td>
+            <td>
+              {data.name}
+            </td>
+          </tr>
+        {/each}
+      </tbody>
+    </table>
+  </div>
 </section>
