@@ -42,7 +42,7 @@
         name: name.toLocaleLowerCase(),
         langue: langue.toLocaleLowerCase(),
         comment: comment.toLocaleLowerCase(),
-        coll_id: coll_id,
+        coll_id: coll_id === "-1" ? null : coll_id,
         user_id: $user.id,
       },
     ]);
@@ -53,7 +53,7 @@
       errorText = error.message;
     }
   };
-  $: if (name || langue || author_id || coll_id) {
+  $: if (name || langue || author_id || coll_id || comment) {
     isError = false;
     errorText = "";
   }

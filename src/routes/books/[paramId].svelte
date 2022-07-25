@@ -66,7 +66,7 @@
         langue: langue.toLocaleLowerCase(),
         author_id: author_id,
         comment: comment.toLocaleLowerCase(),
-        coll_id: coll_id,
+        coll_id: coll_id === "-1" ? null : coll_id,
       })
       .match({ id: paramIdNum });
     if (!error) {
@@ -100,7 +100,7 @@
     await getRow(paramIdNum);
     ref.focus();
   });
-  $: if (name || langue || author_id || comment) {
+  $: if (name || langue || author_id || coll_id || comment) {
     isError = false;
     errorText = "";
   }
