@@ -5,6 +5,7 @@
   import { onMount } from "svelte";
   let name = "",
     langue = "",
+    comment = "",
     author_id = null,
     coll_id = null;
   let isError = false;
@@ -35,9 +36,16 @@
   const handleSave = async () => {
     isError = false;
     errorText = "";
-    const { error } = await supabase
-      .from("books")
-      .insert([{ author_id: author_id, name: name.toLocaleLowerCase(), langue: langue.toLocaleLowerCase(), coll_id: coll_id, user_id: $user.id }]);
+    const { error } = await supabase.from("books").insert([
+      {
+        author_id: author_id,
+        name: name.toLocaleLowerCase(),
+        langue: langue.toLocaleLowerCase(),
+        comment: comment.toLocaleLowerCase(),
+        coll_id: coll_id,
+        user_id: $user.id,
+      },
+    ]);
     if (!error) {
       goto(route);
     } else {
@@ -79,6 +87,10 @@
     <div class="mb-3 mt-3">
       <label for="langue" class="form-label">Langue :</label>
       <input type="text" class="form-control" bind:value={langue} />
+    </div>
+    <div class="mb-3 mt-3">
+      <label for="comment" class="form-label">Comment :</label>
+      <textarea class="form-control" bind:value={comment} />
     </div>
     <div class="mb-3 mt-3">
       <label for="coll_id" class="form-label">Collection :</label>
