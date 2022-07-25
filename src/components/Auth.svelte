@@ -61,10 +61,10 @@
   <main class="container-fluid p-2 my-4 shadow border border-primary rounded-3">
     <div class="d-flex justify-content-left align-items-center">
       <img src={logo} alt="MyBooks" width="100px" height="100px" />
-      <p class="h1 text-capitalize">My Books</p>
+      <p class="h1 text-capitalize ms-2">My Books</p>
     </div>
 
-    <p class="h2 text-center text-capitalize">
+    <p class="h6 text-center text-capitalize pt-2">
       {#if isMember}sign in{:else}register{/if}
     </p>
     <form on:submit|preventDefault={handleSubmit}>
